@@ -33,5 +33,6 @@ Rails.application.routes.draw do
 
   post 'quote/create' => 'quotes#create'
   post 'contact/create' => 'leads#create'
+  
 end
 
