@@ -1,0 +1,41 @@
+1. How many contact requests are made per month?
+
+	select date_part('year', creation_date) as year, date_part('month', creation_date) as month, count(id)
+		from factcontact
+		group by year, month
+		order by year, month;
+
+2. How many bid solicitations are made per month?
+
+	select date_part('year', creation) as year, date_part('month', creation) as month, count(id)
+		from factquote
+		group by year, month
+		order by year, month;
+
+3. How many elevators per customer do we have?
+
+	select company_name, sum(nb_elevator) as number_of_elevators
+		from dimcustomers
+		group by company_name
+		order by number_of_elevators desc;
+
+4. The number of unique requests (ContactId) grouped by Month (Creation Date)?
+
+	select distinct id, date_part('year', creation_date) as year, date_part('month', creation_date) as month
+		from factcontact
+		group by id, year, month
+		order by year, month;
+
+5. The number of unique requests (QuoteId) grouped by Month (Creation Date)
+	
+	select distinct id, date_part('year', creation) as year, date_part('month', creation) as month
+		from factquote
+		group by id, year, month
+		order by year, month;
+
+6. The number of elevators (ElevatorId) contained in the buildings belonging to each customer
+
+	select customer_id, building_id, count(id) 
+		from factelevator
+		group by building_id, customer_id
+		order by building_id, customer_id;
