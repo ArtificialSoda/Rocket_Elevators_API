@@ -8,18 +8,19 @@ class Ability
 
     if user.present?
       if user.customer?
-      
-        offset = 9
+
+        customerID = Customer.where(admin_user_id: user.id).take[:id]
+        
         can :read, AdminUser, id: user.id
         can :read, Customer, admin_user_id: user.id
-        can :read, Elevator, customer_id: user.id - offset
-        can :read, Column, customer_id: user.id - offset
-        can :read, Battery, customer_id: user.id - offset
-        can :read, Building, customer_id: user.id - offset
-        can :read, BuildingDetail, customer_id: user.id - offset
+        can :read, Elevator, customer_id: customerID
+        can :read, Column, customer_id: customerID
+        can :read, Battery, customer_id: customerID
+        can :read, Building, customer_id: customerID
+        can :read, BuildingDetail, customer_id: customerID
 
         # USER ------ CUSTOMER ----- BUILDING
-        # 
+        
 
       end
 
