@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  building_type: MyString
+  no_of_appartments: 1
+  no_of_floors: 1
+  no_of_basements: 1
+  no_of_elevators_cages: 1
+  no_of_parking_spaces: 1
+  no_of_tenant_companies: 1
+  no_of_distinct_businesses: 1
+  max_occupants_per_floors: 1
+
+two:
+  building_type: MyString
+  no_of_appartments: 1
+  no_of_floors: 1
+  no_of_basements: 1
+  no_of_elevators_cages: 1
+  no_of_parking_spaces: 1
+  no_of_tenant_companies: 1
+  no_of_distinct_businesses: 1
+  max_occupants_per_floors: 1

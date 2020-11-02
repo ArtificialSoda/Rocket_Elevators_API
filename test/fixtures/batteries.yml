@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  building_id: MyString
+  type: 
+  status: MyString
+  employee_id: MyString
+  commissioning_date: 2020-10-19
+  last_inspection_date: 2020-10-19
+  operations_certificate: MyString
+  information: MyString
+  notes: MyString
+
+two:
+  building_id: MyString
+  type: 
+  status: MyString
+  employee_id: MyString
+  commissioning_date: 2020-10-19
+  last_inspection_date: 2020-10-19
+  operations_certificate: MyString
+  information: MyString
+  notes: MyString

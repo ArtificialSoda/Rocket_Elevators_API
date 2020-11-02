@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RocketApp</title>
+    <meta charset="utf-8">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'https://cdn.jsdelivr.net/npm/et-line@1.0.1/style.min.css' %>
+    <%= stylesheet_link_tag    'https://use.fontawesome.com/releases/v5.0.10/css/all.css' %>
+
+    <%= favicon_link_tag 'LOGO_702x702.png'%>
+
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
+    <% if params[:controller].include?('active_admin') %>
+      <%= stylesheet_link_tag 'active_admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'active_admin', 'data-turbolinks-track': 'reload' %>
+    <% end %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= yield %>
+
+    <script> var plugin_path ='assets/';</script>
+  </body>
+</html>
