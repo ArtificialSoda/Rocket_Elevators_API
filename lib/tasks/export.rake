@@ -15,6 +15,7 @@ namespace :export do
      desc "export data from mysql database to postgresql table DimCustomers"
      task dimcustomers: :environment do
          table = Customer.all
+         elevators = Elevator.all
          
         # conn = PG::Connection.open(dbname: "datawarehouse_development")
          conn = PG::Connection.open(host: "codeboxx-postgresql.cq6zrczewpu2.us-east-1.rds.amazonaws.com", user: "codeboxx", password: "Codeboxx1!", dbname: "pg_Trevor_Kitchen_team2")
@@ -22,7 +23,18 @@ namespace :export do
          conn.exec("TRUNCATE \"dimcustomers\" RESTART IDENTITY")
  
          table.each do |row|
-            nb_elevator = 1+rand(50)
+            # define the maximum range of elevators to select for safety can be uncommented.
+            # nb_elevator = 1+rand(50)
+            customerID = row.id
+
+            eCounter = 0
+            elevators.each do |elevator|
+                if elevator.customer_id == customerID
+                    eCounter = eCounter + 1
+                end                
+            end 
+            
+            nb_elevator = eCounter
              
              # Path to add ramdom date to nil field
              if row.customer_creation_date == nil then
