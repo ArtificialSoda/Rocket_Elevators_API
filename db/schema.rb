@@ -43,12 +43,13 @@ ActiveRecord::Schema.define(version: 2020_10_23_232206) do
   create_table "admin_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "batteries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -129,17 +130,6 @@ ActiveRecord::Schema.define(version: 2020_10_23_232206) do
     t.index ["employee_id"], name: "index_customers_on_employee_id"
   end
 
-  create_table "dimcustomers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.date "creation_date"
-    t.string "company_name"
-    t.string "full_name_of_company_main_contact"
-    t.string "email_of_company_main_contact"
-    t.integer "nb_elevator"
-    t.string "contact_city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "elevators", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "serial_number"
     t.string "model"
@@ -170,32 +160,6 @@ ActiveRecord::Schema.define(version: 2020_10_23_232206) do
     t.index ["admin_user_id"], name: "index_employees_on_admin_user_id"
   end
 
-  create_table "factcontact", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.date "creation_date"
-    t.string "company_name"
-    t.string "email"
-    t.integer "project_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "factelevator", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "serial_number"
-    t.string "date_of_commissioning"
-    t.string "building_city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "factquote", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.date "creation"
-    t.string "company_name"
-    t.string "email"
-    t.integer "nb_elevator"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "leads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "contact_full_name"
     t.string "company_name"
@@ -222,16 +186,15 @@ ActiveRecord::Schema.define(version: 2020_10_23_232206) do
     t.integer "no_of_distinct_businesses"
     t.integer "max_occupants_per_floors"
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "no_of_elevators"
     t.string "product_grade"
     t.string "elevator_cost"
     t.string "installation_cost"
     t.string "total_cost"
     t.integer "no_of_daily_hours_of_activity"
-    t.bigint "customer_id"
     t.string "company_name"
     t.string "contact_email"
-    t.index ["customer_id"], name: "index_quotes_on_customer_id"
   end
 
 end
