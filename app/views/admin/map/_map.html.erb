@@ -36,13 +36,15 @@
         const washington = { lat: 38.867033, lng: -76.979235 };
         // The map, centered at Uluru
         map = new google.maps.Map(document.getElementById("testmapper"), {
-          center: { lat: 38.867033, lng: -76.979235 },
-          zoom: 8,
+          center: { lat: 38.500000, lng: -98.000000 },
+          zoom: 5,
         });
         // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
-          position: washington,
-          map: map,
+        const markers = locations.map((location, i) => {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length],
+          });
         });
       }
 
@@ -54,4 +56,6 @@
     <h1>Customer Map</h1>
     <div id="testmapper"></div>
 </body>
+
+
 
