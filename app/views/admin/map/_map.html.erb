@@ -1,0 +1,48 @@
+
+ 
+    <title>Customer Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+       
+     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_api_key']}&callback=initMap&libraries=&v=weekly", defer: 'defer' %>
+
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #testmapper {
+        height: 550px;
+        width: 60%;
+
+
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+          
+        margin: auto;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100px;
+        margin: 10px;
+      }
+    </style>
+    <script>
+      let map;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("testmapper"), {
+          center: { lat: 46.813878, lng: -71.207981 },
+          zoom: 8,
+        });
+      }
+    </script>
+
+
+<body>
+    <h1>Customer Map</h1>
+    <div id="testmapper"></div>
+</body>
+
+    		
