@@ -104,5 +104,7 @@ gem 'omniauth'
 
 gem 'cancancan'
 
-gem 'sendgrid-ruby'
+gem "figaro"
+
+
 

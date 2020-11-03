@@ -127,3 +127,6 @@ database_second.yml
 
 # Ignore API key config files
 sengrid.env
+
+# Ignore application configuration
+/config/application.yml
