@@ -29,7 +29,9 @@ class LeadsController < InheritedResources::Base
     respond_to do |format|
 
       if @lead.save
-        format.html { redirect_to root_path, notice: "Save process completed!" }
+        # Deliver the greeting email
+        UserNotifierMailer.send_greeting_email(@lead).deliver
+        format.html { redirect_to root_path, notice: "Contact Us form sent!" }
         format.json { render json: @lead, status: :created, location: @lead }
       else
         format.html { 

@@ -253,6 +253,7 @@ GEM
       railties (>= 5.0)
     ruby2_keywords (0.0.2)
     ruby_dep (1.5.0)
+    ruby_http_client (3.5.1)
     rubyzip (2.3.0)
     rvm1-capistrano3 (1.4.0)
       capistrano (~> 3.0)
@@ -279,6 +280,8 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sendgrid-ruby (6.3.6)
+      ruby_http_client (~> 3.4)
     sixarm_ruby_unaccent (1.2.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
@@ -360,6 +363,7 @@ DEPENDENCIES
   rvm1-capistrano3
   sass-rails (~> 5.0)
   selenium-webdriver
+  sendgrid-ruby
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

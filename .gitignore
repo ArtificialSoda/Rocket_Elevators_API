@@ -119,5 +119,11 @@ yarn-debug.log*
 
 
 .DS_Store
+
+# Ignore database config files
 database.yml
 database_second.yml
+
+
+# Ignore API key config files
+sengrid.env
