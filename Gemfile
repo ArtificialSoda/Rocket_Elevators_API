@@ -106,5 +106,5 @@ gem 'cancancan'
 
 gem "figaro"
 
-
-
+gem 'twilio-ruby'
+gem "slack-notifier"
