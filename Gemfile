@@ -105,3 +105,4 @@ gem 'omniauth'
 gem 'cancancan'
 
 gem 'twilio-ruby'
+gem "slack-notifier"
