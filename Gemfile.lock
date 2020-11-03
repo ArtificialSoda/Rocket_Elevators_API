@@ -70,6 +70,10 @@ GEM
     bindex (0.8.1)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
+    bootstrap (4.0.0)
+      autoprefixer-rails (>= 6.0.3)
+      popper_js (>= 1.12.9, < 2)
+      sass (>= 3.5.2)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -329,6 +333,7 @@ DEPENDENCIES
   activeadmin
   bcrypt_pbkdf (>= 1.0, < 2.0)
   bootsnap (>= 1.1.0)
+  bootstrap (~> 4.0.0)
   bootstrap-sass (~> 3.3.4)
   bootstrap-social-rails
   byebug
