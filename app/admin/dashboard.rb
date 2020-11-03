@@ -1,5 +1,5 @@
 ActiveAdmin.register_page "Dashboard" do
-    content do
-      render partial: 'Dashboard'
-    end
+  content do
+    render partial: 'dashboard'
   end
+end

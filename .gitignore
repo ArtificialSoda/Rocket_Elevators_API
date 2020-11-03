@@ -122,5 +122,13 @@ yarn-debug.log*
 config/database.yml
 config/database_second.yml
 
+# Ignore database config files
+database.yml
+database_second.yml
+
+
+# Ignore API key config files
+sengrid.env
+
 # Ignore application configuration
 /config/application.yml

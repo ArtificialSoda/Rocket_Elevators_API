@@ -13,7 +13,7 @@
 
 //= require_tree ./jquery/
 
-//= require jquery
+//= require jquery3
 
 //= require jquery_ujs
 
