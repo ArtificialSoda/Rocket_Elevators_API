@@ -280,6 +280,7 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     sixarm_ruby_unaccent (1.2.0)
+    slack-notifier (2.3.2)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
     spring (2.1.1)
@@ -360,6 +361,7 @@ DEPENDENCIES
   rvm1-capistrano3
   sass-rails (~> 5.0)
   selenium-webdriver
+  slack-notifier
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

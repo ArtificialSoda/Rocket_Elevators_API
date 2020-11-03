@@ -104,3 +104,4 @@ gem 'omniauth'
 
 gem 'cancancan'
 
+gem "slack-notifier"
