@@ -132,3 +132,4 @@ sengrid.env
 
 # Ignore application configuration
 /config/application.yml
+app/services/watson_textspeech.rb
