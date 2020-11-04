@@ -29,41 +29,35 @@
       }
     </style>
     <script>
-      let map;
 
+
+var locations_from_bd = [];
+<% Address.all.each do |address| %>
+  console.log('<%= address.latitude %>');
+  locations_from_bd.push({lat: <%= address.latitude %>, lng: <%= address.longitude %> })
+<% end %>
+
+      let map;
+      let lat = locations_from_bd[0].lat;
+      let lng = locations_from_bd[0].lng;
       function initMap() {
         // The location of washington
-        const washington = { lat, lng };
+        //const washington = { lat, lng };
         // The map, centered at Uluru
         map = new google.maps.Map(document.getElementById("testmapper"), {
-          center: { lat, lng },
+          center: { lat, lng},
           zoom: 8,
         });
         // The marker, positioned at Uluru
-        const markers = locations.map((location, i) => {
+        const markers = locations_from_bd.map((location, i) => {
+          console.log(i);
           return new google.maps.Marker({
             position: location,
-            label: labels[i % labels.length],
+            label: i,
+            map: map,
           });
         });
-
-
-    <%= @latitude = Address.first[:latitude] %>
-    <%= @longitude = Address.first[:longitude] %>
-
-
-    var lat = <%= @latitude %>
-    var lng = <%= @longitude %>
-
-      //AddressArray = []
-
-    //<% Address.last[:id].times do %>
-
-    //<% end %> 
-      
-
-
-
+} 
     </script>
 
 
