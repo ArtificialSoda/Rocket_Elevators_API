@@ -12132,11 +12132,13 @@ add = [
         suite_or_apartment: rand(1..100),
         city: add[index][:city],
         postal_code: add[index][:postalCode],
+        latitude: add[index][:coordinates][:lat],
+        longitude: add[index][:coordinates][:lng],
         country: "United States",
         notes: Faker::Measurement.metric_height
     )
     addresses.save!
-end
+end 
 
 
 
