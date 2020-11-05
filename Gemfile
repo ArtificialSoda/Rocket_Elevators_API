@@ -109,3 +109,4 @@ gem "figaro"
 gem 'twilio-ruby'
 gem "slack-notifier"
 gem 'ibm_watson', '~> 1.6'
+gem 'zendesk_api'

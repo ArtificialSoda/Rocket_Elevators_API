@@ -119,6 +119,7 @@ yarn-debug.log*
 
 
 .DS_Store
+
 config/database.yml
 config/database_second.yml
 
