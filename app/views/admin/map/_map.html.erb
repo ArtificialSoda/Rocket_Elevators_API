@@ -31,24 +31,37 @@
     <script>
 
 
-var locations_from_bd = [];  // Lat & Lng
-var address_place = [];      // Location of customer
-var client_name = [];        // Name of client
-var nb_of_batt = [];         // Number of batteries
+var locations_from_bd = [];  // Lat & Lng x
+var address_place = [];      // Location of customer x
+var client_name = [];        // Name of client x
+var nb_of_batt = [];         // Number of batteries 
 var nb_of_coll = [];         // Number of Column
 var nb_of_elev = [];         // Number of elevator
-var tech_contact = [];       // Name of technical contact
-var entity_of_address = [];  // Entity of address (Customer or building)
+var tech_contact = [];       // Name of technical contact x
+var entity_of_address = [];  // Entity of address (Customer or building) x
 
 <% Address.all.each do |address| %>
-  locations_from_bd.push({lat: <%= address.latitude %>, lng: <%= address.longitude %> }) // Get location in Lat and Lng in an array
-  address_place.push({address_place: <%= address.number_and_street %> })  // Get address streets and number in an array (Location of Building)
+  locations_from_bd.push({lat: <%= address.latitude %>, lng: <%= address.longitude %> })  // Get location in Lat and Lng in an array
+  address_place.push({address_place: '<%= address.number_and_street %>'})                  // Get address streets and number in an array (Location of Building)
   console.log('<%= address.number_and_street %>')
-  entity_of_address.push({entity_of_address:<%= address.entity %>})   // Get Each Entity of address (Customer or Building)
+  entity_of_address.push({entity_of_address: "<%= address.entity %>"})                      // Get Each Entity of address (Customer or Building)
   console.log('<%= address.entity %>')
 <% end %>
 
 <% Building.all.each do |building| %>
+  client_name.push({client_name: '<%= building.full_name_of_the_building_administrator %>'})                      // Get Client name of building
+  tech_contact.push({tech_contact: "<%= building.full_name_of_the_technical_contact_for_the_building %>"})      // Get Tech support of building
+  nb_of_batt.push({nb_of_batt: <%= building.batteries.size %>})  
+  nb_of_coll.push({nb_of_coll: <%= building.how_many_columns  %>})
+  nb_of_elev.push({nb_of_elev: <%= building.how_many_elevators %>})
+  console.log('<%= building.full_name_of_the_building_administrator %>')
+  console.log('<%= building.full_name_of_the_technical_contact_for_the_building %>')
+<% end %>
+
+
+<% %>
+
+
 
 
 
@@ -68,38 +81,32 @@ var entity_of_address = [];  // Entity of address (Customer or building)
             '<div id="content">' +
             '<div id="siteNotice">' +
             "</div>" +
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+            '<h3 id="firstHeading" class="firstHeading">Customer info:</h3>' +
             '<div id="bodyContent">' +
-            "<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large " +
-            "sandstone rock formation in the southern part of the " +
-            "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
-            "south west of the nearest large town, Alice Springs; 450&#160;km " +
-            "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
-            "features of the Uluru - Kata Tjuta National Park. Uluru is " +
-            "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
-            "Aboriginal people of the area. It has many springs, waterholes, " +
-            "rock caves and ancient paintings. Uluru is listed as a World " +
-            "Heritage Site.</p>" +
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-            "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
-            "(last visited June 22, 2009).</p>" +
+            '<p><b>Name of customer: </b></p>'+
+            '<p><b>Address: </b></p>'+
+            '<p><b>Technician contact: </b></p>'+
+            '<p><b>Number of batteries: </b></p>'+
+            '<p><b>Number of Columns: </b></p>'+
+            '<p><b>Number of elevators: </b></p>'+
             "</div>" +
             "</div>";
           const infowindow = new google.maps.InfoWindow({
             content: contentString,
           });
           // The marker, positioned at Uluru
-          const marker = locations_from_bd.map((location, i) => {
+          locations_from_bd.map((location, i) => {
             console.log(i);
-            return new google.maps.Marker({
+            let marker =  new google.maps.Marker({
               position: location,
-              label: i,
+              label: i.toString(),
               map: map,
-            });        
-          });
+            });
           marker.addListener("click", () => {
             infowindow.open(map, marker);
+          });        
           });
+
         } 
     </script>
 
