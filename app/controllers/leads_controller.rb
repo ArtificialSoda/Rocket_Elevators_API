@@ -23,8 +23,6 @@ class LeadsController < InheritedResources::Base
   end
 
   def create
-    p params
-    p lead_params
     @lead = Lead.new(lead_params)
 
     respond_to do |format|

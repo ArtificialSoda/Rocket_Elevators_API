@@ -915,8 +915,8 @@
 												<input required type="text" value="" class="form-control" name="leads[contact_full_name]" id="contact-name">
 											</div>
 											<div class="col-md-6">
-												<label for="contact-business">Contact Business Name </label>
-												<input type="text" value="" class="form-control" name="leads[company_name]" id="contact-business">
+												<label for="contact-business">Contact Business Name *</label>
+												<input required type="text" value="" class="form-control" name="leads[company_name]" id="contact-business">
 											</div>
 									</div>
 									<div class="row">
@@ -925,18 +925,18 @@
 												<input required type="email" value="" class="form-control" name="leads[email]" id="contact-email">
 											</div>
 											<div class="col-md-6">
-												<label for="contact-phone">Phone Number (XXX-XXX-XXXX)</label>
-												<input type="tel" value="" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" name="leads[phone]" id="contact-phone">
+												<label for="contact-phone">Phone Number (XXX-XXX-XXXX) *</label>
+												<input required type="tel" value="" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" class="form-control" name="leads[phone]" id="contact-phone">
 											</div>
 									</div>
 									<div class="row">
 											<div class="col-md-8">
-												<label for="contact-project-name">Project Name </label>
+												<label for="contact-project-name">Project Name * </label>
 												<input required type="text" value="" class="form-control" name="leads[project_name]" id="contact-project-name">
 											</div>
 											<div class="col-md-4">
-												<label for="contact-department">Department</label>
-												<select class="form-control pointer" name="leads[department]">
+												<label for="contact-department">Department *</label>
+												<select required class="form-control pointer" name="leads[department]">
 													<option value="">--- Select ---</option>
 													<option value="Residential">Residential</option>
 													<option value="Corporate">Corporate</option>
@@ -948,8 +948,8 @@
 																		
 									<div class="row">
 										<div class="col-md-12">
-											<label for="contact-description">Project Description </label>
-											<textarea maxlength="10000" rows="8" class="form-control" name="leads[project_description]" id="contact-description"></textarea>
+											<label for="contact-description">Project Description * </label>
+											<textarea required maxlength="10000" rows="8" class="form-control" name="leads[project_description]" id="contact-description"></textarea>
 										</div>
 									</div>
 									<div class="row">
@@ -960,10 +960,10 @@
 									</div>
 									<div class="row">
 											<div class="col-md-12">
-												<label for="contact-attachment">File Attachment</label>
+												<label for="contact-attachment">File Attachment *</label>
 
 												<!-- custom file upload -->
-												<input class="custom-file-upload" type="file" id="file" name="leads[attached_file]" id="contact-attachment" data-btn-text="Select a File" />
+												<input required class="custom-file-upload" type="file" id="file" name="leads[attached_file]" id="contact-attachment" data-btn-text="Select a File" />
 												<small class="text-muted block">Max file size: 10Mb</small>
 
 											</div>
