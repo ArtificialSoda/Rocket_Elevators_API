@@ -74,10 +74,20 @@ class LeadsController < InheritedResources::Base
           # When getting the error 'hostname does not match the server certificate'
           # use the API at https://yoursubdomain.zendesk.com/api/v2
         end
-         
-        p "------------"
-        p client
-        ZendeskAPI::Ticket.create!(client, :subject => "Test ticket!!!", :comment => { :value => "This is a test" }, :submitter_id => client.current_user.id, :priority => "urgent")
+  
+        ZendeskAPI::Ticket.create!(client, :subject => "#{@lead.contact_full_name} from #{@lead.company_name}", :comment => { :value => """ 
+          
+          The contact #{@lead.contact_full_name} from company #{@lead.company_name} can be reached at email #{@lead.email} and at phone number #{@lead.phone}. 
+          
+          \n#{@lead.department} has a project named #{@lead.project_name} which would require contribution from Rocket Elevators. 
+          
+          \n#{@lead.project_description} 
+          
+          \nAttached Message: #{@lead.message} 
+          
+          \nThe Contact uploaded an attachment.
+          
+          """}, :submitter_id => client.current_user.id, :priority => "high")
         
         format.html { redirect_to root_path, notice: "Contact Us form sent!" }
         format.json { render json: @lead, status: :created, location: @lead }

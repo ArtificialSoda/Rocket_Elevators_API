@@ -6,8 +6,5 @@ class UserNotifierMailer < ApplicationMailer
       @lead = lead
       mail( :to => @lead.email,
       :subject => 'Rocket Elevators - Thank You For Contacting Us!' )
-      p "------------------------- "
-      p @lead 
-      p @lead.email
     end
 end
