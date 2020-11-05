@@ -34,10 +34,8 @@ Rails.application.routes.draw do
   post 'quote/create' => 'quotes#create'
   post 'contact/create' => 'leads#create'
 
-  resources :watson do
-    collection do
-      get :speak
-    end
+  resources :dashboard do
+    get 'speak', :on => :collection
   end
   
 end
