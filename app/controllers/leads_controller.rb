@@ -28,13 +28,14 @@ class LeadsController < InheritedResources::Base
     respond_to do |format|
 
       if @lead.save
-        # Deliver the greeting email
-        # UserNotifierMailer.send_greeting_email(@lead).deliver
+        # Deliver the greeting email (Sengrid API)
+        UserNotifierMailer.send_greeting_email(@lead).deliver
 
-        # Send Zendesk support ticket
+        # Send support ticket (Zendesk API)
         client = ZendeskAPI::Client.new do |config|
+          
           # Mandatory:
-        
+  
           config.url = "https://rocket-elevators-help.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
         
           # Basic / Token Authentication
@@ -85,7 +86,8 @@ class LeadsController < InheritedResources::Base
           
           \nThe Contact uploaded an attachment.
           
-          """}, :submitter_id => client.current_user.id, :priority => "high")
+          """}, :submitter_id => client.current_user.id, :priority => "high"
+        )
         
         format.html { redirect_to root_path, notice: "Contact Us form sent!" }
         format.json { render json: @lead, status: :created, location: @lead }
