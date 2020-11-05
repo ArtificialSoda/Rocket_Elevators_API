@@ -75,10 +75,7 @@
         <h2>Click the button below to hear today's facts and stats on RocketElevators.</h2>
         <a href="#" class="button instagram"><span class="gradient"></span>Facts & Stats</a>
     </body>
-
-
+    
+    <%= audio_tag("Greet.wav", autoplay: true, controls: true)%>
 
 </html>
-<div class="button">
-  <%= link_to "speak", speak_watson_index_path %>
-</div>

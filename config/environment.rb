@@ -4,7 +4,7 @@ require_relative 'application'
 # Initialize the Rails application.
 Rails.application.initialize!
 
-development: 
+:development
   ActionMailer::Base.smtp_settings = {
     :user_name => 'apikey',
     :password => ENV['sendgrid_password'],
@@ -15,7 +15,7 @@ development:
     :enable_starttls_auto => true
   }
 
-production:
+:production
   ActionMailer::Base.smtp_settings = {
     :user_name => 'apikey',
     :password => ENV['sendgrid_password'],
