@@ -1,8 +1,8 @@
 class ElevatorsController < InheritedResources::Base
 
-  def index
-    @elevators = Elevator.all
-  end
+ # def index
+  #  @elevators = Elevator.all
+  #end
   
   private
     def elevator_params
