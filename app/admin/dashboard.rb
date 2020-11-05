@@ -16,8 +16,6 @@ ActiveAdmin.register_page "Dashboard" do
     )
 
     text_to_speech.service_url = ENV["watson_url"]
-
-    if Elevator.status != "Active"
     
     tmp_file = "#{Rails.root}/app/assets/audios/Greet.wav"
 
