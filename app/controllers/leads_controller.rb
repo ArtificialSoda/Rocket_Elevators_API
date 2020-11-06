@@ -91,6 +91,7 @@ class LeadsController < InheritedResources::Base
         )
         
         format.html { redirect_to root_path, notice: "Contact Us form sent!" }
+        format.html { redirect_to root_path, notice: "Save process completed!" }
         format.json { render json: @lead, status: :created, location: @lead }
       else
         format.html { 
