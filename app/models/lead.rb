@@ -1,9 +1,8 @@
 class Lead < ApplicationRecord
-
-    validate :file_size_under_ten_mb 
-
+    has_one_attached :attachment
+    belongs_to :customer, :optional => true
     def initialize(params = {})
-        super        
+        super
         @file = params[:attached_file]
         if @file
             self.attached_file = @file.open()

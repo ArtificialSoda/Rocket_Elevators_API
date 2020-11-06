@@ -24,7 +24,8 @@ class LeadsController < InheritedResources::Base
 
   def create
     @lead = Lead.new(lead_params)
-
+    # @lead.attached_file.read     did not work
+    
     respond_to do |format|
 
       if @lead.save
@@ -90,6 +91,7 @@ class LeadsController < InheritedResources::Base
         )
         
         format.html { redirect_to root_path, notice: "Contact Us form sent!" }
+        format.html { redirect_to root_path, notice: "Save process completed!" }
         format.json { render json: @lead, status: :created, location: @lead }
       else
         format.html { 
