@@ -23,9 +23,12 @@ class LeadsController < InheritedResources::Base
   end
 
   def create
+<<<<<<< HEAD
     p params
     
     p lead_params
+=======
+>>>>>>> willjacques
     @lead = Lead.new(lead_params)
     # @lead.attached_file.read     did not work
     
