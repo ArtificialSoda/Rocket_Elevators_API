@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_04_002621) do
+ActiveRecord::Schema.define(version: 2020_11_06_180143) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -66,7 +66,11 @@ ActiveRecord::Schema.define(version: 2020_11_04_002621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
+    t.bigint "buildings_id"
+    t.bigint "employees_id"
+    t.index ["buildings_id"], name: "index_batteries_on_buildings_id"
     t.index ["customer_id"], name: "index_batteries_on_customer_id"
+    t.index ["employees_id"], name: "index_batteries_on_employees_id"
   end
 
   create_table "building_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -76,7 +80,9 @@ ActiveRecord::Schema.define(version: 2020_11_04_002621) do
     t.datetime "updated_at", null: false
     t.bigint "building_id"
     t.bigint "customer_id"
+    t.bigint "buildings_id"
     t.index ["building_id"], name: "index_building_details_on_building_id"
+    t.index ["buildings_id"], name: "index_building_details_on_buildings_id"
     t.index ["customer_id"], name: "index_building_details_on_customer_id"
   end
 
@@ -92,8 +98,12 @@ ActiveRecord::Schema.define(version: 2020_11_04_002621) do
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
     t.bigint "address_id"
+    t.bigint "addresses_id"
+    t.bigint "customers_id"
     t.index ["address_id"], name: "index_buildings_on_address_id"
+    t.index ["addresses_id"], name: "index_buildings_on_addresses_id"
     t.index ["customer_id"], name: "index_buildings_on_customer_id"
+    t.index ["customers_id"], name: "index_buildings_on_customers_id"
   end
 
   create_table "columns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -106,6 +116,8 @@ ActiveRecord::Schema.define(version: 2020_11_04_002621) do
     t.datetime "updated_at", null: false
     t.bigint "battery_id"
     t.bigint "customer_id"
+    t.bigint "batteries_id"
+    t.index ["batteries_id"], name: "index_columns_on_batteries_id"
     t.index ["battery_id"], name: "index_columns_on_battery_id"
     t.index ["customer_id"], name: "index_columns_on_customer_id"
   end
@@ -126,9 +138,13 @@ ActiveRecord::Schema.define(version: 2020_11_04_002621) do
     t.bigint "admin_user_id"
     t.bigint "address_id"
     t.bigint "employee_id"
+    t.bigint "addresses_id"
+    t.bigint "users_id"
     t.index ["address_id"], name: "index_customers_on_address_id"
+    t.index ["addresses_id"], name: "index_customers_on_addresses_id"
     t.index ["admin_user_id"], name: "index_customers_on_admin_user_id"
     t.index ["employee_id"], name: "index_customers_on_employee_id"
+    t.index ["users_id"], name: "index_customers_on_users_id"
   end
 
   create_table "dimcustomers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -211,6 +227,8 @@ ActiveRecord::Schema.define(version: 2020_11_04_002621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "attached_file_path"
+    t.bigint "customer_id"
+    t.index ["customer_id"], name: "index_leads_on_customer_id"
   end
 
   create_table "quotes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -233,7 +251,17 @@ ActiveRecord::Schema.define(version: 2020_11_04_002621) do
     t.bigint "customer_id"
     t.string "company_name"
     t.string "contact_email"
+    t.string "full_name"
+    t.string "email"
+    t.string "phone"
     t.index ["customer_id"], name: "index_quotes_on_customer_id"
   end
 
+  add_foreign_key "batteries", "buildings", column: "buildings_id"
+  add_foreign_key "batteries", "employees", column: "employees_id"
+  add_foreign_key "building_details", "buildings", column: "buildings_id"
+  add_foreign_key "buildings", "addresses", column: "addresses_id"
+  add_foreign_key "buildings", "customers", column: "customers_id"
+  add_foreign_key "columns", "batteries", column: "batteries_id"
+  add_foreign_key "customers", "addresses", column: "addresses_id"
 end

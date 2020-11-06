@@ -2,6 +2,7 @@
   "name": "Rocket_app",
   "private": true,
   "dependencies": {
+    "@googlemaps/markerclustererplus": "^1.0.3",
     "bootstrap": "4.3.1",
     "jquery": "^3.5.1",
     "popper": "1.0.1",
