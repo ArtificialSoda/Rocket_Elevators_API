@@ -3,8 +3,9 @@
     <title>Customer Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
        
-     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_api_key']}&callback=initMap&libraries=&v=weekly", defer: 'defer' %>
-       <%= javascript_include_tag"https://rawgit.com/kswedberg/jquery-smooth-scroll/master/jquery.smooth-scroll.js"%>
+    <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_api_key']}&callback=initMap&libraries=&v=weekly", defer: 'defer' %>
+    <%= javascript_include_tag "https://rawgit.com/kswedberg/jquery-smooth-scroll/master/jquery.smooth-scroll.js"%>
+    <%= javascript_include_tag "https://unpkg.com/@googlemaps/markerclustererplus/dist/index.min.js"%>
     <style type="text/css">
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -56,18 +57,15 @@ var entity_of_address = [];  // Entity of address (Customer or building) x
   nb_of_elev.push({nb_of_elev: <%= building.how_many_elevators %>})
 <% end %>
 
-var all_info = [{address_place}];
-
-
       let map;
-      let lat = locations_from_bd[0].lat;
-      let lng = locations_from_bd[0].lng;
+      let lat = locations_from_bd[300].lat;
+      let lng = locations_from_bd[300].lng;
 
       function initMap() {
         const infowindow = new google.maps.InfoWindow();
         map = new google.maps.Map(document.getElementById("testmapper"), {
-          center: { lat, lng},
-          zoom: 8,
+          center: {lat, lng},
+          zoom: 4,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         var marker, i;
@@ -76,7 +74,7 @@ var all_info = [{address_place}];
             position : new google.maps.LatLng(locations_from_bd[i].lat, locations_from_bd[i].lng),
             map : map
           });
-
+          
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
           return function() {
             infowindow.setContent(
