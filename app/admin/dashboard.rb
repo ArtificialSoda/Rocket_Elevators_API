@@ -18,7 +18,14 @@ ActiveAdmin.register_page "Dashboard" do
     text_to_speech.service_url = ENV["watson_url"]
     
     tmp_file = "#{Rails.root}/app/assets/audios/Greet.wav"
+    
+    "#{(Elevator.count/1000).floor} thousand #{Elevator.count%1000}"
 
+    @elevatorcount = Elevator.count
+    @elevatorcounttext = "#{@elevatorcount}"
+      if @elevatorcount > 1000
+        @elevatorcounttext = "#{(@elevatorcount/1000).floor} thousand #{@elevatorcount%1000}"
+      end
 
     @activeelevators = (Elevator.count - Elevator.where(status: 'Active').count)
     @activeelevatorstext = "#{@activeelevators}"
@@ -34,7 +41,7 @@ ActiveAdmin.register_page "Dashboard" do
     File.open(tmp_file, "wb") do |audio_file|
         response = text_to_speech.synthesize(
             {
-                "text": "Greetings #{activeuserfirst} #{activeuserlast}. Currently #{@activeelevatorstext} elevators are not in running status and are being serviced. There are currently #{(Elevator.count/1000).floor} thousand #{Elevator.count%1000} elevators deployed in the #{Building.count} buildings of your #{Customer.count} customers. You currently have #{Quote.count} quotes awaiting processing. You currently have #{Lead.count} leads in your contact requests #{Battery.count} batteries are deployed across #{diffcities} cities.",
+                "text": "Greetings #{activeuserfirst} #{activeuserlast}. Currently #{@activeelevatorstext} elevators are not in running status and are being serviced. There are currently #{@elevatorcounttext} elevators deployed in the #{Building.count} buildings of your #{Customer.count} customers. You currently have #{Quote.count} quotes awaiting processing. You currently have #{Lead.count} leads in your contact requests #{Battery.count} batteries are deployed across #{diffcities} cities.",
                 "accept": "audio/wav",
                 "voice": "en-US_AllisonVoice"
             }
