@@ -48,8 +48,8 @@ var entity_of_address = [];  // Entity of address (Customer or building) x
 <% end %>
 
 <% Building.all.each do |building| %>
-  client_name.push({client_name: '<%= building.full_name_of_the_building_administrator %>'})                      // Get Client name of building
-  tech_contact.push({tech_contact: "<%= building.full_name_of_the_technical_contact_for_the_building %>"})      // Get Tech support of building
+  client_name.push({client_name: '<%= building.full_name_of_the_technical_contact_for_the_building %>'})                      // Get Client name of building
+  tech_contact.push({tech_contact: "<%= building.full_name_of_the_building_administrator%>"})      // Get Tech support of building
   nb_of_floors.push({nb_of_floors: "<%= building.how_many_floors%>"})
   nb_of_batt.push({nb_of_batt: <%= building.batteries.size %>})  
   nb_of_coll.push({nb_of_coll: <%= building.how_many_columns  %>})
@@ -70,33 +70,31 @@ var all_info = [{address_place}];
           zoom: 8,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
+        var marker, i;
         for (i = 0; i < locations_from_bd.length; i++) {
-          const marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
             position : new google.maps.LatLng(locations_from_bd[i].lat, locations_from_bd[i].lng),
             map : map
           });
 
-          infowindow.setContent(
-            console.log(client_name[i]) +
-            '<div id="infowindow">' + 
-            "</div>" +
-            '<h3>Customer info: </h3>' +
-            '<p>__________________________</p>' +
-            '<div id="bodyContent">' +
-            '<p><b>Name of customer: </b>'+ client_name[i] + '</p>' +
-            '<p><b>Address: </b>' + address_place[i] +'</p>' +
-            '<p><b>Technician contact: </b>'+ tech_contact[i] + '</p>' +
-            '<p><b>Number of floors: </b>'+ nb_of_floors[i] + '</p>' +
-            '<p><b>Number of batteries: </b>'+ nb_of_batt[i] + '</p>' +
-            '<p><b>Number of columns: </b>'+ nb_of_coll[i] + '</p>' +
-            '<p><b>Number of elevators: </b>'+ nb_of_elev[i] + '</p>' +
-            "</div>");
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-              infowindow.close(); // Close previously opened infowindow
-              infowindow.getContent();
+          return function() {
+            infowindow.setContent(
+              '<div id="infowindow">' + 
+              "</div>" +
+              '<h3>Customer info: </h3>' +
+              '<p>__________________________</p>' +
+              '<div id="bodyContent">' +
+              '<p><b>Name of customer: </b>'+ client_name[i].client_name + '</p>' +
+              '<p><b>Address: </b>' + address_place[i].address_place +'</p>' +
+              '<p><b>Technician contact: </b>'+ tech_contact[i].tech_contact + '</p>' +
+              '<p><b>Number of floors: </b>'+ nb_of_floors[i].nb_of_floors + '</p>' +
+              '<p><b>Number of batteries: </b>'+ nb_of_batt[i].nb_of_batt + '</p>' +
+              '<p><b>Number of columns: </b>'+ nb_of_coll[i].nb_of_coll + '</p>' +
+              '<p><b>Number of elevators: </b>'+ nb_of_elev[i].nb_of_elev + '</p>' +
+              "</div>");
               infowindow.open(map, marker);
-            }
+          }
           })(marker, i));
         }
       }    
