@@ -119,6 +119,7 @@ yarn-debug.log*
 
 
 .DS_Store
+
 config/database.yml
 config/database_second.yml
 
@@ -132,3 +133,4 @@ sengrid.env
 
 # Ignore application configuration
 /config/application.yml
+app/services/watson_textspeech.rb
