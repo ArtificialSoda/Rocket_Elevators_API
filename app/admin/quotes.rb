@@ -4,7 +4,7 @@ ActiveAdmin.register Quote do
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
-  permit_params  :building_type, :no_of_elevators_cages, :no_of_parking_spaces, :no_of_tenant_companies, :no_of_distinct_businesses, :max_occupants_per_floors, :no_of_elevators, :product_grade, :elevator_cost, :installation_cost, :total_cost 
+  permit_params  :full_name, :email, :phone, :building_type, :no_of_elevators_cages, :no_of_parking_spaces, :no_of_tenant_companies, :no_of_distinct_businesses, :max_occupants_per_floors, :no_of_elevators, :product_grade, :elevator_cost, :installation_cost, :total_cost 
   
   
   index do

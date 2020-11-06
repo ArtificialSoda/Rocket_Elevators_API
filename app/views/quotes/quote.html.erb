@@ -202,13 +202,19 @@
 								</div>
 
                                 <div class="col-md-6 ml-20 mr-20">
-                                    <label for="email">EMAIL ADDRESS</label>
-                                    <input required type="email" placeholder="john.doe@example.com" class="form-control" name="email" id="email">
+                                    <label for="email-quote">EMAIL ADDRESS</label>
+                                    <input required type="email" placeholder="john.doe@example.com" class="form-control" name="email-quote" id="email-quote">
                                 </div>
                                 
                                 <div class="col-md-6 ml-20 mr-20">
+                                    <label for="phone-quote">PHONE NUMBER</label>
+                                    <input required type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="514-888-8888" class="form-control" name="phone-quote" id="phone-quote">
+                                </div>
+                     
+                                <div class="col-md-6 ml-20 mr-20 mt-40">
                                     <label for="building">BUILDING TYPE</label>
 								</div>
+
 								<div class="col-md-6 ml-20 mr-20">
                                     <select id="building-type" class="form-control pointer" name="building">
                                         <option value="Residential">Residential</option>
@@ -269,22 +275,11 @@
                 </div>
 
                 <div id="results" class="col-md-5 col-sm-5 mt-80" style="display: none;">
-                    <h2 class="fw-600 text-center mr-20">Cost Assessment</h2>
-                    <!-- NUM ELEVATOR SHAFTS FORM (READONLY) -->
-                    <form id="num-shafts-form" method="post" enctype="multipart/form-data">
-                        <fieldset>
-                            <div class="row justify-content-center">
-                                <div class="col-md-6 ml-20 mr-20">
-                                    <label for="num-shafts">NUMBER OF ELEVATORS NEEDED</label>
-                                    <input readonly required type="number" value="" min="0" class="form-control" name="num-shafts" id="num-shafts">
-                                </div>
-                            </div> 
-                        </fieldset>
-                    </form>
-                    <h3 class="text-center fw-400">Choose a product line grade.</h3>
-                    <!-- PRICES FORM (READONLY) -->
+                
                     <form id="product-lines-form" method="post" action="quote/create" enctype="multipart/form-data">
                         <fieldset>
+                            <h2 class="text-center fw-600 mt-20 mr-20">Cost Assessment</h3>
+                            <h3 class="text-center fw-400">Choose a product line grade.</h3>
                             <div class="row justify-content-center ">
                                 <div class="radiodiv">
                                     <input type="radio" id="standard" name="product-line" value="Standard" checked>
@@ -298,30 +293,35 @@
                                     <input type="radio" id="excelium" name="product-line" value="Excelium">
                                     <label class="radio-label" for="excelium">Excelium</label><br>
                                 </div>
+
                             </div>
+                            <!-- RESULTS  (READONLY) -->
                             <div class="row justify-content-center">
+
+                                <div class="col-md-6 ml-20 mr-20">
+                                    <label for="num-shafts">NUMBER OF ELEVATORS NEEDED</label>
+                                    <input readonly required type="number" value="" min="0" class="form-control" name="num-shafts" id="num-shafts">
+                                </div>
+
                                 <div class="col-md-6 ml-20 mr-20">
                                     <label for="elevator-price">ELEVATOR COST</label>
                                     <input readonly required type="text" value="$0.00" class="form-control" name="elevator-price" id="elevator-price">
 								</div>
-							</div>
-							<div class="row justify-content-center">
-                                <div class="col-md-6 ml-20 mr-20">
+
+                                 <div class="col-md-6 ml-20 mr-20">
                                     <label for="installation-price">INSTALLATION COST</label>
                                     <input readonly required type="text" value="$0.00" class="form-control" name="installation-price" id="installation-price">
                                 </div>
-                            </div>
-                            <div class="row justify-content-center">
+
                                 <div class="col-md-6 ml-20 mr-20">
                                     <label for="total-estimate">TOTAL COST ESTIMATE</label>
                                     <input readonly required type="text" value="$0.00" class="form-control" name="total-estimate" id="total-estimate">
                                 </div>
-                            </div>
-							<div id="submit-quote-btn" class="row justify-content-center text-center">
-                                <div class="col-md-6 ml-20 mr-20">
+
+                                <div id="submit-quote-btn" class="col-md-6 mt-20 ml-20 mr-20">
                                     <button type="submit" style="width: 100%" class="btn btn-primary"><i class="fa fa-check"></i>SUBMIT QUOTE</button>
                                 </div>
-                            </div> 
+							</div>
                         </fieldset>
                     </form>
                 </div>
@@ -359,7 +359,7 @@
 							<form class="validate" action="php/newsletter.php" method="post" data-success="Subscribed! Thank you!" data-toastr-position="bottom-right">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-									<input type="email" id="email" name="email" class="form-control required" placeholder="Enter your Email">
+									<input type="email-quote" id="email-quote" name="email-quote" class="form-control required" placeholder="Enter your Email">
 									<span class="input-group-btn">
 										<button class="btn btn-success" type="submit">Subscribe</button>
 									</span>
