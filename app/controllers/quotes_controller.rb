@@ -47,8 +47,64 @@ class QuotesController < ApplicationController
             # p '------------------'
             # p '------------------'
             if @quote.save 
-                format.html { redirect_to @quote, notice: "Save process completed!" }
+
+                        # Send support ticket (Zendesk API)
+                client = ZendeskAPI::Client.new do |config|
+                
+                    # Mandatory:
+            
+                    config.url = "https://rocket-elevators-help.zendesk.com/api/v2" # e.g. https://mydesk.zendesk.com/api/v2
+                
+                    # Basic / Token Authentication
+                    config.username = "dimitrov.fabien@gmail.com/token"
+                
+                    # Choose one of the following depending on your authentication choice
+                    config.token = ENV['zendesk_key']
+                    # config.password = "your zendesk password"
+                
+                    # OAuth Authentication
+                    # config.access_token = "your OAuth access token"
+                
+                    # Optional:
+                
+                    # Retry uses middleware to notify the user
+                    # when hitting the rate limit, sleep automatically,
+                    # then retry the request.
+                    config.retry = true
+                
+                    # Raise error when hitting the rate limit.
+                    # This is ignored and always set to false when `retry` is enabled.
+                    # Disabled by default.
+                    config.raise_error_when_rate_limited = false
+                
+                    # Logger prints to STDERR by default, to e.g. print to stdout:
+                    require 'logger'
+                    config.logger = Logger.new(STDOUT)
+                
+                    # Changes Faraday adapter
+                    # config.adapter = :patron
+                
+                    # Merged with the default client options hash
+                    # config.client_options = {:ssl => {:verify => false}, :request => {:timeout => 30}}
+                
+                    # When getting the error 'hostname does not match the server certificate'
+                    # use the API at https://yoursubdomain.zendesk.com/api/v2
+                end
+            
+                ZendeskAPI::Ticket.create!(client, :subject => "Quote from #{@quote.full_name}", :comment => { :value => """ 
+                    
+                    A quote, with quote ID ##{@quote.id}, has just been given to a user with the filled-out name of #{@quote.full_name}. 
+                    
+                    \nThis user is reachable by email at #{@quote.email} and by phone at #{@quote.phone}.
+
+                    \nThis #{@quote.building_type} project of grade #{@quote.product_grade} will require #{@quote.no_of_elevators} elevators and will be priced at #{@quote.total_cost}.
+                    
+                    """}, :submitter_id => client.current_user.id, :priority => "high"
+                )
+
+                format.html { redirect_to @quote, notice: "Quote form completed!" }
                 format.json { render json: @quote, status: :created, location: @quote }
+            
             else
                 format.html { 
                     flash.now[:notice]="Save proccess coudn't be completed!" 
@@ -83,7 +139,10 @@ class QuotesController < ApplicationController
 
         # Allowed parameters
         def quote_params
-            params.permit(:building_type,
+            params.permit(:full_name,
+                            :email,
+                            :phone,
+                            :building_type,
                             :no_of_appartments, 
                             :no_of_floors, 
                             :no_of_basements, 

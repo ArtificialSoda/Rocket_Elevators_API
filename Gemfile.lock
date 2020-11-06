@@ -126,14 +126,11 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-<<<<<<< HEAD
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-=======
     dropbox_api (0.1.18)
       faraday (<= 1.0)
       oauth2 (~> 1.1)
->>>>>>> 2e3ebde9a53ba5dca5ec5338c2d4b24236e606c3
     ed25519 (1.2.4)
     erubi (1.9.0)
     eventmachine (1.2.7)
@@ -142,13 +139,10 @@ GEM
       i18n (>= 1.6, < 2)
     faraday (1.0.0)
       multipart-post (>= 1.2, < 3)
-<<<<<<< HEAD
       ruby2_keywords
     faye-websocket (0.11.0)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
-=======
->>>>>>> 2e3ebde9a53ba5dca5ec5338c2d4b24236e606c3
     ffi (1.13.1)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
