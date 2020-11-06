@@ -108,3 +108,4 @@ gem "figaro"
 
 gem 'twilio-ruby'
 gem "slack-notifier"
+gem 'dropbox_api'
