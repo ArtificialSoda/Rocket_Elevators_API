@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get 'residential' => 'pages#residential'
   get 'index' => 'pages#index'
   get 'admin_root' => 'elevators#index'
+  get 'googledcf02c3ead535472.html' => 'pages#googledcf02c3ead535472.html'
 
   # POST routes
 
