@@ -34,19 +34,20 @@
       var nb_of_elev = [];         // Number of elevator x
       var tech_contact = [];       // Name of technical contact x
       var entity_of_address = [];  // Entity of address (Customer or building) x
-      <% Address.all.each do |address| %>
-        locations_from_bd.push({lat: <%= address.latitude %>, lng: <%= address.longitude %> })  // Get location in Lat and Lng in an array
-        address_place.push({address_place: '<%= address.number_and_street %>'})                  // Get address streets and number in an array (Location of Building)
-        entity_of_address.push({entity_of_address: "<%= address.entity %>"})                      // Get Each Entity of address (Customer or Building)
-      <% end %>
+      var addressLat = [];
+
       <% Building.all.each do |building| %>
-        client_name.push({client_name: '<%= building.full_name_of_the_technical_contact_for_the_building %>'})                      // Get Client name of building
-        tech_contact.push({tech_contact: "<%= building.full_name_of_the_building_administrator%>"})      // Get Tech support of building
+        address_place.push({address_place: '<%= building.address.number_and_street %>'})                                   // Get address streets and number in an array (Location of Building)
+        locations_from_bd.push({lat: <%= building.address.latitude%>, lng: <%=building.address.longitude %>  })            // Get location in Lat and Lng in an array
+        client_name.push({client_name: '<%= building.full_name_of_the_technical_contact_for_the_building %>'})             // Get Client name of building
+        tech_contact.push({tech_contact: "<%= building.full_name_of_the_building_administrator%>"})                        // Get Tech support of building
         nb_of_floors.push({nb_of_floors: "<%= building.how_many_floors%>"})
         nb_of_batt.push({nb_of_batt: <%= building.batteries.size %>})  
         nb_of_coll.push({nb_of_coll: <%= building.how_many_columns  %>})
         nb_of_elev.push({nb_of_elev: <%= building.how_many_elevators %>})
       <% end %>
+
+
 
       let map;
       let lat = locations_from_bd[300].lat;
