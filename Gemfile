@@ -111,3 +111,4 @@ gem "slack-notifier"
 gem 'ibm_watson', '~> 1.6'
 gem 'zendesk_api'
 gem 'wavefile', '~> 1.1', '>= 1.1.1'
+gem 'dropbox_api'

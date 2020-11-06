@@ -24,7 +24,8 @@ class LeadsController < InheritedResources::Base
 
   def create
     @lead = Lead.new(lead_params)
-
+    # @lead.attached_file.read     did not work
+    
     respond_to do |format|
 
       if @lead.save
