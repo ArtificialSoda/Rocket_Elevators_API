@@ -28,4 +28,14 @@ class Building < ApplicationRecord
             end
         how_many
     end
+
+    def how_many_floors
+        how_many = 0 
+        self.batteries.each do |battery|
+            battery.columns.each do |column|
+                how_many = how_many + column.number_of_floors_served.size
+            end
+        end
+        how_many
+    end
 end

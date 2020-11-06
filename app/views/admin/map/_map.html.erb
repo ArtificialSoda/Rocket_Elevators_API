@@ -4,7 +4,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
        
      <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google_api_key']}&callback=initMap&libraries=&v=weekly", defer: 'defer' %>
-
+       <%= javascript_include_tag"https://rawgit.com/kswedberg/jquery-smooth-scroll/master/jquery.smooth-scroll.js"%>
     <style type="text/css">
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -34,80 +34,72 @@
 var locations_from_bd = [];  // Lat & Lng x
 var address_place = [];      // Location of customer x
 var client_name = [];        // Name of client x
-var nb_of_batt = [];         // Number of batteries 
-var nb_of_coll = [];         // Number of Column
-var nb_of_elev = [];         // Number of elevator
+var nb_of_floors = [];       // Number of Floor x
+var nb_of_batt = [];         // Number of batteries  x
+var nb_of_coll = [];         // Number of Column x
+var nb_of_elev = [];         // Number of elevator x
 var tech_contact = [];       // Name of technical contact x
 var entity_of_address = [];  // Entity of address (Customer or building) x
 
 <% Address.all.each do |address| %>
   locations_from_bd.push({lat: <%= address.latitude %>, lng: <%= address.longitude %> })  // Get location in Lat and Lng in an array
   address_place.push({address_place: '<%= address.number_and_street %>'})                  // Get address streets and number in an array (Location of Building)
-  console.log('<%= address.number_and_street %>')
   entity_of_address.push({entity_of_address: "<%= address.entity %>"})                      // Get Each Entity of address (Customer or Building)
-  console.log('<%= address.entity %>')
 <% end %>
 
 <% Building.all.each do |building| %>
   client_name.push({client_name: '<%= building.full_name_of_the_building_administrator %>'})                      // Get Client name of building
   tech_contact.push({tech_contact: "<%= building.full_name_of_the_technical_contact_for_the_building %>"})      // Get Tech support of building
+  nb_of_floors.push({nb_of_floors: "<%= building.how_many_floors%>"})
   nb_of_batt.push({nb_of_batt: <%= building.batteries.size %>})  
   nb_of_coll.push({nb_of_coll: <%= building.how_many_columns  %>})
   nb_of_elev.push({nb_of_elev: <%= building.how_many_elevators %>})
-  console.log('<%= building.full_name_of_the_building_administrator %>')
-  console.log('<%= building.full_name_of_the_technical_contact_for_the_building %>')
 <% end %>
 
-
-<% %>
-
+var all_info = [{address_place}];
 
 
-
-
-      let map, infoWindow;
+      let map;
       let lat = locations_from_bd[0].lat;
       let lng = locations_from_bd[0].lng;
 
       function initMap() {
-        // The location of washington
-        //const washington = { lat, lng };
-        // The map, centered at Uluru
+        const infowindow = new google.maps.InfoWindow();
         map = new google.maps.Map(document.getElementById("testmapper"), {
           center: { lat, lng},
           zoom: 8,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
         });
-          const contentString =
-            '<div id="content">' +
-            '<div id="siteNotice">' +
-            "</div>" +
-            '<h3 id="firstHeading" class="firstHeading">Customer info:</h3>' +
-            '<div id="bodyContent">' +
-            '<p><b>Name of customer: </b></p>'+
-            '<p><b>Address: </b></p>'+
-            '<p><b>Technician contact: </b></p>'+
-            '<p><b>Number of batteries: </b></p>'+
-            '<p><b>Number of Columns: </b></p>'+
-            '<p><b>Number of elevators: </b></p>'+
-            "</div>" +
-            "</div>";
-          const infowindow = new google.maps.InfoWindow({
-            content: contentString,
-          });
-          // The marker, positioned at Uluru
-          locations_from_bd.map((location, i) => {
-            console.log(i);
-            let marker =  new google.maps.Marker({
-              position: location,
-              label: i.toString(),
-              map: map,
-            });
-          marker.addListener("click", () => {
-            infowindow.open(map, marker);
-          });        
+        for (i = 0; i < locations_from_bd.length; i++) {
+          const marker = new google.maps.Marker({
+            position : new google.maps.LatLng(locations_from_bd[i].lat, locations_from_bd[i].lng),
+            map : map
           });
 
-        } 
+          infowindow.setContent(
+            console.log(client_name[i]) +
+            '<div id="infowindow">' + 
+            "</div>" +
+            '<h3>Customer info: </h3>' +
+            '<p>__________________________</p>' +
+            '<div id="bodyContent">' +
+            '<p><b>Name of customer: </b>'+ client_name[i] + '</p>' +
+            '<p><b>Address: </b>' + address_place[i] +'</p>' +
+            '<p><b>Technician contact: </b>'+ tech_contact[i] + '</p>' +
+            '<p><b>Number of floors: </b>'+ nb_of_floors[i] + '</p>' +
+            '<p><b>Number of batteries: </b>'+ nb_of_batt[i] + '</p>' +
+            '<p><b>Number of columns: </b>'+ nb_of_coll[i] + '</p>' +
+            '<p><b>Number of elevators: </b>'+ nb_of_elev[i] + '</p>' +
+            "</div>");
+          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+              infowindow.close(); // Close previously opened infowindow
+              infowindow.getContent();
+              infowindow.open(map, marker);
+            }
+          })(marker, i));
+        }
+      }    
     </script>
 
 
