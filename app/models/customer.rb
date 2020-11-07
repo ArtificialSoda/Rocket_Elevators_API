@@ -40,7 +40,7 @@ after_update :upload_file
         puts "Upload File"
         leads = Lead.where(email: self.email_company_contact)
         puts leads.to_a
-        client = DropboxApi::Client.new("Hss0XUte1KMAAAAAAAAAAZ5qgHDJpfrXKhtvyLmNZVN5uLrFkhUmeptQp3xiGD0N")
+        client = DropboxApi::Client.new("secret")
         leads.each do |lead|
         puts lead
         if lead.attached_file
