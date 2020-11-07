@@ -23,14 +23,21 @@ class LeadsController < InheritedResources::Base
   end
 
   def create
+    p params
+    
+    p lead_params
+    # attached_file = lead_params.delete(:attached_file)
+    # puts "The attached file #{attached_file}"
+    # lead_params[:attached_file] = attached_file.read
+    # lead_params[:attached_file_path] = attached_file.path
     @lead = Lead.new(lead_params)
+    # @lead.attached_file = attached_file.read
     # @lead.attached_file.read     did not work
     
     respond_to do |format|
 
       if @lead.save
         # Deliver the greeting email (Sengrid API)
-        puts request.domain
         UserNotifierMailer.send_greeting_email(@lead).deliver
 
         # Send support ticket (Zendesk API)

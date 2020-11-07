@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_180143) do
+ActiveRecord::Schema.define(version: 2020_11_06_191907) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -24,6 +24,27 @@ ActiveRecord::Schema.define(version: 2020_11_06_180143) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -66,11 +87,7 @@ ActiveRecord::Schema.define(version: 2020_11_06_180143) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
-    t.bigint "buildings_id"
-    t.bigint "employees_id"
-    t.index ["buildings_id"], name: "index_batteries_on_buildings_id"
     t.index ["customer_id"], name: "index_batteries_on_customer_id"
-    t.index ["employees_id"], name: "index_batteries_on_employees_id"
   end
 
   create_table "building_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -80,9 +97,7 @@ ActiveRecord::Schema.define(version: 2020_11_06_180143) do
     t.datetime "updated_at", null: false
     t.bigint "building_id"
     t.bigint "customer_id"
-    t.bigint "buildings_id"
     t.index ["building_id"], name: "index_building_details_on_building_id"
-    t.index ["buildings_id"], name: "index_building_details_on_buildings_id"
     t.index ["customer_id"], name: "index_building_details_on_customer_id"
   end
 
@@ -98,12 +113,8 @@ ActiveRecord::Schema.define(version: 2020_11_06_180143) do
     t.datetime "updated_at", null: false
     t.bigint "customer_id"
     t.bigint "address_id"
-    t.bigint "addresses_id"
-    t.bigint "customers_id"
     t.index ["address_id"], name: "index_buildings_on_address_id"
-    t.index ["addresses_id"], name: "index_buildings_on_addresses_id"
     t.index ["customer_id"], name: "index_buildings_on_customer_id"
-    t.index ["customers_id"], name: "index_buildings_on_customers_id"
   end
 
   create_table "columns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -116,8 +127,6 @@ ActiveRecord::Schema.define(version: 2020_11_06_180143) do
     t.datetime "updated_at", null: false
     t.bigint "battery_id"
     t.bigint "customer_id"
-    t.bigint "batteries_id"
-    t.index ["batteries_id"], name: "index_columns_on_batteries_id"
     t.index ["battery_id"], name: "index_columns_on_battery_id"
     t.index ["customer_id"], name: "index_columns_on_customer_id"
   end
@@ -138,13 +147,9 @@ ActiveRecord::Schema.define(version: 2020_11_06_180143) do
     t.bigint "admin_user_id"
     t.bigint "address_id"
     t.bigint "employee_id"
-    t.bigint "addresses_id"
-    t.bigint "users_id"
     t.index ["address_id"], name: "index_customers_on_address_id"
-    t.index ["addresses_id"], name: "index_customers_on_addresses_id"
     t.index ["admin_user_id"], name: "index_customers_on_admin_user_id"
     t.index ["employee_id"], name: "index_customers_on_employee_id"
-    t.index ["users_id"], name: "index_customers_on_users_id"
   end
 
   create_table "dimcustomers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -257,11 +262,5 @@ ActiveRecord::Schema.define(version: 2020_11_06_180143) do
     t.index ["customer_id"], name: "index_quotes_on_customer_id"
   end
 
-  add_foreign_key "batteries", "buildings", column: "buildings_id"
-  add_foreign_key "batteries", "employees", column: "employees_id"
-  add_foreign_key "building_details", "buildings", column: "buildings_id"
-  add_foreign_key "buildings", "addresses", column: "addresses_id"
-  add_foreign_key "buildings", "customers", column: "customers_id"
-  add_foreign_key "columns", "batteries", column: "batteries_id"
-  add_foreign_key "customers", "addresses", column: "addresses_id"
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
 end

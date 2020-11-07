@@ -1,5 +1,5 @@
 class Lead < ApplicationRecord
-    has_one_attached :attachment
+    has_one_attached :attached_file
     belongs_to :customer, :optional => true
     def initialize(params = {})
         super
