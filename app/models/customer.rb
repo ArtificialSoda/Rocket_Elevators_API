@@ -10,7 +10,7 @@ class Customer < ApplicationRecord
     belongs_to :employee
 
     
-    # has_many :quotes, through: :admin_users
+    # has_many :quotes, through: :customers
     has_many :batteries
     def display_name
         "#{company_name}"
@@ -37,16 +37,26 @@ after_update :upload_file
 
 
     def upload_file
-        self.leads.all.each do |lead|
-        client = DropboxApi::Client.new("Secret")
-        if lead.attached_file != nil
+        puts "Upload File"
+        leads = Lead.where(email: self.email_company_contact)
+        puts leads.to_a
+        client = DropboxApi::Client.new("Hss0XUte1KMAAAAAAAAAAZ5qgHDJpfrXKhtvyLmNZVN5uLrFkhUmeptQp3xiGD0N")
+        leads.each do |lead|
+        puts lead
+        if lead.attached_file
+            puts "lead has attached file"
             
-            client.create_folder "#{lead.customer.company_name}"
-            client.upload("/#{lead.customer.company_name}/#{File.basename(lead.original_filename)}", lead.attached_file) 
+            # client.create_folder "/#{self.company_name}"
+
+            file_name_data = lead.attached_file_path.split("/")
+            file_name = file_name_data[file_name_data.length() - 1]
+            puts file_name
+            puts lead.attached_file
+            client.upload("/#{self.company_name}/#{File.basename(file_name)}", lead.attached_file.attachment) 
     
             lead.attached_file = nil
-            lead.original_filename = nil
-            lead.attachment.purge
+            lead.attached_file_path = nil
+            # lead.attached_file.purge
     
             lead.save!
             
