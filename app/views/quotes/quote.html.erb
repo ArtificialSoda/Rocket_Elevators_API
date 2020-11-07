@@ -402,5 +402,17 @@
 		<!-- SCROLL TO TOP -->
 		<a href="#" id="toTop"></a>
 
+    		<script>
+		$(document).ready(function(){
+			$(".recaptchaForm").on('submit', function(event){
+
+				var recaptcha = $('#g-recaptcha-response').val();
+				if(recaptcha===""){
+					event.preventDefault();
+					alert("Please Check Recaptcha")
+				}
+			})
+		})
+		</script>
 
 
