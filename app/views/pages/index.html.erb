@@ -886,7 +886,7 @@
 					<div class="row">
 
 						<!-- FORM -->
-						<div class="col-md-8 col-sm-8">
+						<div class="col-md-8 col-sm-8 recaptchaForm">
 
 							<h3>Fill out this form if you have any <strong><em>questions</em></strong> or <strong><em>concerns</em></strong>.</h3>
 
@@ -973,7 +973,7 @@
 									</div>
 
 								</fieldset>
-								<div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+								<div class="g-recaptcha" data-sitekey=6LdMF-AZAAAAANZPQMFvU3URuPSjE6CJMU0jCaw-></div>
 								<br/>
 								<div class="row">
 									<div class="col-md-12">
@@ -1075,4 +1075,16 @@
 		<!-- SCROLL TO TOP -->
 		<a href="#" id="toTop"></a>
 
+		<script>
+		$(document).ready(function(){
+			$(".recaptchaForm").on('submit', function(event){
+
+				var recaptcha = $('#g-recaptcha-response').val();
+				if(recaptcha===""){
+					event.preventDefault();
+					alert("Please Check Recaptcha")
+				}
+			})
+		})
+		</script>
 		
