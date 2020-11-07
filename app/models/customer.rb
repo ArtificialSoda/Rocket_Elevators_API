@@ -40,7 +40,7 @@ after_update :upload_file
             file_name = file_name_data[file_name_data.length() - 1]
             puts file_name
             puts lead.attached_file
-            client.upload("/#{self.company_name}/#{File.basename(file_name)}", lead.attached_file)
+            client.upload("/#{self.company_name}/#{File.basename(file_name)}", lead.attached_file.attachment)
             lead.attached_file = nil
             lead.attached_file_path = nil
             # lead.attached_file.purge
