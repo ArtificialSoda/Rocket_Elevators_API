@@ -30,6 +30,7 @@ class LeadsController < InheritedResources::Base
 
       if @lead.save
         # Deliver the greeting email (Sengrid API)
+        puts request.domain
         UserNotifierMailer.send_greeting_email(@lead).deliver
 
         # Send support ticket (Zendesk API)

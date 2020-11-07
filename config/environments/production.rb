@@ -94,5 +94,16 @@ Rails.application.configure do
 
   # Host
   # routes.default_url_options[:host] = 'rocket-elevators-trevor.tk'
-  config.action_mailer.default_url_options = { host: "rocket-elevators-trevor.tk" }
+  config.action_mailer.default_url_options = { host: "rocket-elevators.ca" }
+
+  
+  ActionMailer::Base.smtp_settings = {
+    :user_name => 'apikey',
+    :password => ENV['sendgrid_password'],
+    :domain => 'rocket-elevators.ca',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 end
