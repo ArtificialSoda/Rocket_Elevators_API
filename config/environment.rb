@@ -4,26 +4,36 @@ require_relative 'application'
 # Initialize the Rails application.
 Rails.application.initialize!
 
-:development
-  ActionMailer::Base.smtp_settings = {
-    :user_name => 'apikey',
-    :password => ENV['sendgrid_password'],
-    :domain => 'localhost:3000',
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-  }
+# domain 
+# if Rails.env == "development"
+#   domain = 'localhost:3000'
+# elsif Rails.env == "production"
+#   domain = 'rocket-elevators.ca'
+# end
 
-:production
-  ActionMailer::Base.smtp_settings = {
-    :user_name => 'apikey',
-    :password => ENV['sendgrid_password'],
-    :domain => 'rocket-elevators.ca',
-    :address => 'smtp.sendgrid.net',
-    :port => 587,
-    :authentication => :plain,
-    :enable_starttls_auto => true
-  }
+# p domain 
+# p "--------------"
+
+
+ActionMailer::Base.smtp_settings = {
+  :user_name => 'apikey',
+  :password => ENV['sendgrid_password'],
+  :domain => 'rocket-elevators.ca', #'localhost:3000'
+  :address => 'smtp.sendgrid.net',
+  :port => 587,
+  :authentication => :plain,
+  :enable_starttls_auto => true
+}
+
+# :production
+#   ActionMailer::Base.smtp_settings = {
+#     :user_name => 'apikey',
+#     :password => ENV['sendgrid_password'],
+#     :domain => 'rocket-elevators.ca',
+#     :address => 'smtp.sendgrid.net',
+#     :port => 587,
+#     :authentication => :plain,
+#     :enable_starttls_auto => true
+#   }
 
 
