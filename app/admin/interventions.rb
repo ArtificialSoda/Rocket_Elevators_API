@@ -5,7 +5,7 @@ ActiveAdmin.register Intervention do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :intervention_start, :intervention_stop, :result, :report, :status
+  permit_params :intervention_start, :intervention_stop, :result, :report, :status, :elevator_id
   #
   # or
   #
