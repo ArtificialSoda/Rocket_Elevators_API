@@ -12476,4 +12476,23 @@ end
 end
 
 
+30.times do
+    intervention_start = Faker::Date.between(from: '2020-07-01', to: '2020-09-01')
+    intervention_stop = Faker::Date.between(from: '2020-09-02', to: '2020-11-01')
+    result = ["Success", "Failure", "Incomplete"]
+    report = [Faker::Lorem.sentence,""]
+    intervention_status = ["Pending", "InProgress", "Resumed"]
+    results = result[rand(0..2)]
+    reports = report[rand(0..1)]
+    statusresult = ""
+    if results == "Success"
+        statusresult = "Complete"
+    elsif results == "Failure"
+        statusresult = "Interrupted"
+    else
+        statusresult = intervention_status[rand(0.2)]
+    end
+    elevator_id = rand(Elevator.first[:id]..Elevator.last[:id])
+    Intervention.create(intervention_start:intervention_start, intervention_stop: intervention_stop, result: results, report: reports, status: statusresult, elevator_id: elevator_id)
+end
 
