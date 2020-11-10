@@ -12475,5 +12475,14 @@ end
     leads.save
 end
 
+30.times do
+    interventions = intervention.new(
+        intervention_start:
+        intervention_stop:
+        result:
+        report:
+        status:
+    )
+
 
 
