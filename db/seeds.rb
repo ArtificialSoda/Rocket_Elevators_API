@@ -40,6 +40,7 @@ addressType = ["Billing", "Shipping", "Home", "Business"]
 status = ["Inactive","Active"]
 entity = ["Building", "Customer"]
 
+
 # address list as array of objects
 add = [
         {
@@ -12475,14 +12476,21 @@ end
     leads.save
 end
 
+
+result = ["Success", "Failure", "Incomplete"]
+report = [Faker::Lorem.sentence,""]
+intervention_status = ["Pending", "Interrupted", "InProgress", "Resumed", "Complete"]
+
 30.times do
-    interventions = intervention.new(
-        intervention_start:
-        intervention_stop:
-        result:
-        report:
-        status:
+    Intervention.create!(
+        intervention_start: Faker::Date.between(from: '2020-07-01', to: '2020-09-01'),
+        intervention_stop: Faker::Date.between(from: '2020-09-02', to: '2020-11-01'),
+        result: result[rand(0..2)],
+        report: report[rand(0..1)],
+        status: intervention_status[rand(0..4)],
+        elevator_id: rand(Elevator.first[:id]..Elevator.last[:id]),
     )
+end
 
 
 
