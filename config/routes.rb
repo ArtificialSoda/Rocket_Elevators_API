@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :interventions
   devise_for :admin_users, ActiveAdmin::Devise.config
   
   resources :elevators
