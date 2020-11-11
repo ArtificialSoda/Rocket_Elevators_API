@@ -175,6 +175,120 @@ To analyze the business situation of the company for each month every year, we h
 ​
 	order by building_id, customer_id;
 
+## APIs
+
+APIs allow you to save time when developing and help not to invent a bicycle and it tie disparate applications together, allowing them to
+
+complement each other. Just send a simple command and the service will return the necessary data !
+
+  
+
+#### 1: Google Map
+Give our users the best way to get there data on the map inside **infoWindow** like :
+	
+
+ 1.  Location of the Building
+    
+2.  Number of floors in the building (If the information is available)
+    
+3.  Client name
+    
+4.  Number of Batteries
+    
+5.  Number of Columns
+    
+6.  Number of Elevators
+    
+7.  Full name of technical contact
+
+  Using **Arrays** and **ForEach** methods to get the data from our Database and using **function** like this :
+
+    `function  initMap() {
+    
+	    const infowindow = new  google.maps.InfoWindow();
+    
+	    map = new  google.maps.Map(document.getElementById("testmapper"), {
+    
+		    center: {lat, lng},
+    
+		    zoom: 4,
+    
+		    mapTypeId: google.maps.MapTypeId.ROADMAP
+    
+    });`
+
+#### 2: Twilio
+Twilio use capabilities like **SMS**, **WhatsApp**, **Voice**, **Video**, **email**, and even **IoT**, across the customer journey. Its use to allow the platform to get in touch with the technicians in case of problems.
+
+> The designated contact receive the alerts on his mobile phone
+
+
+
+#### 3: Slack
+The **Slack** Web **API** is an interface for querying information from and enacting change in a **Slack** workspace. When a controller changes the status of an elevator, this status is reflected in the information system and persists in the operational database . 
+
+The message look like this :
+
+    The Elevator [Elevator’s ID] with Serial Number [Serial Number] changed status from [Old Status] to [New Status]
+
+  
+
+#### 4: DropBox
+The **Dropbox API** allows developers to work with files in Dropbox, including advanced functionality like **full-text search**, **thumbnails**, **sharing** and get started making *API calls*. Archive their documents in the cloud and the Dropbox API.
+  
+
+#### 5: IBM Watson
+Get deep insights from your **data** Text-to-Speech functionality which can be used on a multitude of platforms. : You can access it via the *Admin panel* in **Dashboard**
+  
+
+#### 6: ZenDesk
+**Zendesk**  is an *open, flexible* CRM platform that lets you **store**, **manage**, and **connect** all of your customer data and must follow up on each contact regardless of its origin.
+
+Either via the “Contact Us” form or also via the “Get a Quote” form a ticket must be created in ZenDesk
+
+Our ticket look like this :
+
+> Subject: [Full Name] from [Company Name]
+> 
+> Comment: The contact [Full Name] from company [Company Name] can be
+> reached at email [E-Mail Address] and at phone number [Phone].
+> [Department] has a project named [Project Name] which would require
+> contribution from Rocket Elevators.
+> 
+> [Project Description]
+> 
+> Attached Message: [Message]
+> 
+> The Contact uploaded an attachment
+
+#### 7: SendGrid
+It allows emails to be sent to a base of users who have authorized transactional communications.
+
+For us it Send a thank you email automatically when a contact completes the "Contact Us" form on the Rocket Elevators website.
+
+The text look like this :
+
+  
+
+> Greetings [Full Name]
+> 
+> We thank you for contacting Rocket Elevators to discuss the
+> opportunity to contribute to your project [Project Name].
+> 
+> A representative from our team will be in touch with you very soon. We
+> look forward to demonstrating the value of our solutions and helping
+> you choose the appropriate product given your requirements.
+> 
+> We’ll Talk soon
+> 
+> The Rocket Team
+
+  
+  
+  
+  
+  
+  
 
 ## Week 7 - APis
 ​

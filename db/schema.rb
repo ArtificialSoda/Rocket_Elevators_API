@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_180143) do
+ActiveRecord::Schema.define(version: 2020_11_10_001450) do
 
   create_table "active_admin_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "namespace"
@@ -198,6 +198,18 @@ ActiveRecord::Schema.define(version: 2020_11_06_180143) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "interventions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "intervention_start"
+    t.datetime "intervention_stop"
+    t.string "result"
+    t.text "report"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "elevator_id"
+    t.index ["elevator_id"], name: "index_interventions_on_elevator_id"
+  end
+
   create_table "leads", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "contact_full_name"
     t.string "company_name"
@@ -241,4 +253,5 @@ ActiveRecord::Schema.define(version: 2020_11_06_180143) do
     t.index ["customer_id"], name: "index_quotes_on_customer_id"
   end
 
+  add_foreign_key "interventions", "elevators"
 end

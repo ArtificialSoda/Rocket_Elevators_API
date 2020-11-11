@@ -4,6 +4,10 @@ require 'slack-notifier'
 class Elevator < ApplicationRecord
     belongs_to :column
     belongs_to :customer
+    has_many :interventions
+    def display_name
+        "#{id}"
+    end
 
     after_update do |e|
         if e.status == 'Intervention'

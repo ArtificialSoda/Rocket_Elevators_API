@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  intervention_start: 2020-11-09 15:35:41
+  intervention_stop: 2020-11-09 15:35:41
+  result: MyString
+  report: MyText
+  status: MyString
+
+two:
+  intervention_start: 2020-11-09 15:35:41
+  intervention_stop: 2020-11-09 15:35:41
+  result: MyString
+  report: MyText
+  status: MyString
