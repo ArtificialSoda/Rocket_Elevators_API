@@ -12182,7 +12182,7 @@ i = 10
 j=1
 
 #create the customers
-10.times do
+15.times do
     
     eMail = Faker::Internet.email
 
@@ -12195,7 +12195,7 @@ j=1
     users.save
 
     # creates a role variable with a 1 in 9 chance of being 0 the other value is 1
-    role = rand(0..9)
+    role = rand(0..3)
     if role > 0
         role = 1
     end
